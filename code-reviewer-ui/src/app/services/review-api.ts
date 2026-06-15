@@ -35,7 +35,7 @@ export interface ReviewResponse {
 
 @Injectable({ providedIn: 'root' })
 export class ReviewApiService {
-  private baseUrl = 'http://localhost:5110/api/review';
+  private baseUrl = 'https://code-reviewer-api-rr1n.onrender.com/api/review';
 
   constructor(private http: HttpClient) {}
 
