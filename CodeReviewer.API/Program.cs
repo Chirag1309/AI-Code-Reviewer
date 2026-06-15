@@ -26,8 +26,8 @@ builder.Services.AddCors(options =>
 
 // Database
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(
+    builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // App services
 builder.Services.AddScoped<IReviewService, ReviewService>();
@@ -36,6 +36,8 @@ builder.Services.AddHttpClient<GeminiReviewService>();
 // ── Pipeline ─────────────────────────────────────────────
 var app = builder.Build();
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
+app.Urls.Add($"http://0.0.0.0:{port}");
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
