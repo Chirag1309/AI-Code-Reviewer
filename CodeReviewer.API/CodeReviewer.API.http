@@ -1,0 +1,6 @@
+@CodeReviewer.API_HostAddress = http://localhost:5110
+
+GET {{CodeReviewer.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

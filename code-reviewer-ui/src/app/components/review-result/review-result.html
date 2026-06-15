@@ -1,0 +1,92 @@
+<div class="container">
+
+  <!-- Loading State -->
+  <div class="loading-card" *ngIf="status === 'Pending' || status === 'Processing'">
+    <div class="spinner"></div>
+    <h2>Analyzing your code...</h2>
+    <p>{{ status === 'Pending' ? 'Waiting in queue...' : 'AI is reviewing your code...' }}</p>
+  </div>
+
+  <!-- Failed State -->
+  <div class="card error-card" *ngIf="status === 'Failed'">
+    <h2>❌ Review Failed</h2>
+    <p>Something went wrong. Please try again.</p>
+    <button class="btn btn-primary" routerLink="/submit">Try Again</button>
+  </div>
+
+  <!-- Completed State -->
+  <div *ngIf="status === 'Completed' && result">
+
+    <!-- Header -->
+    <div class="result-header">
+      <div class="header-left">
+        <h1>Code Review Complete</h1>
+        <p class="subtitle">{{ result.summary }}</p>
+      </div>
+      <div class="score-circle" [ngClass]="getScoreColorClass()">
+        <span class="score-number">{{ result.qualityScore }}</span>
+        <span class="score-label">/ 100</span>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat" *ngFor="let s of getSeverityStats()">
+        <span class="stat-count" [ngClass]="'text-' + s.severity.toLowerCase()">
+          {{ s.count }}
+        </span>
+        <span class="stat-label">{{ s.severity }}</span>
+      </div>
+      <div class="stat">
+        <span class="stat-count text-total">{{ result.issues.length }}</span>
+        <span class="stat-label">Total Issues</span>
+      </div>
+    </div>
+
+    <!-- Issues List -->
+    <div class="issues-section">
+      <h2>Issues Found</h2>
+
+      <div *ngIf="result.issues.length === 0" class="no-issues">
+        ✅ No issues found — great code!
+      </div>
+
+      <div
+        class="issue-card"
+        *ngFor="let issue of result.issues"
+        [ngClass]="'issue-' + issue.severity.toLowerCase()">
+
+        <div class="issue-header">
+          <span [ngClass]="'badge badge-' + issue.severity.toLowerCase()">
+            {{ issue.severity }}
+          </span>
+          <span [ngClass]="'badge badge-' + issue.category.toLowerCase()">
+            {{ issue.category }}
+          </span>
+          <span class="line-number" *ngIf="issue.lineNumber">
+            Line {{ issue.lineNumber }}
+          </span>
+        </div>
+
+        <p class="issue-description">{{ issue.description }}</p>
+
+        <div class="suggestion" *ngIf="issue.suggestion">
+          <span class="suggestion-label">💡 Suggestion</span>
+          <p>{{ issue.suggestion }}</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="btn btn-primary" routerLink="/submit">
+        Review Another
+      </button>
+      <button class="btn btn-secondary" routerLink="/history">
+        View History
+      </button>
+    </div>
+
+  </div>
+</div>

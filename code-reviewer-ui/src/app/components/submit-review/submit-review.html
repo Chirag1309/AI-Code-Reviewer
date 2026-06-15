@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="page-header">
+    <h1>AI Code Reviewer</h1>
+    <p>Paste your code and get an instant AI-powered review</p>
+  </div>
+
+  <div class="card">
+    <div class="form-row">
+      <label>Language</label>
+      <select [(ngModel)]="language">
+        <option value="csharp">C#</option>
+        <option value="javascript">JavaScript</option>
+        <option value="typescript">TypeScript</option>
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="sql">SQL</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label>Paste your code</label>
+      <textarea
+        [(ngModel)]="code"
+        placeholder="Paste your code here..."
+        rows="18"
+        [class.error]="submitted && !code.trim()">
+      </textarea>
+      <span class="error-msg" *ngIf="submitted && !code.trim()">
+        Code cannot be empty
+      </span>
+    </div>
+
+    <button
+      class="btn btn-primary submit-btn"
+      (click)="submitReview()"
+      [disabled]="isLoading">
+      {{ isLoading ? '⏳ Submitting...' : '🔍 Review Code' }}
+    </button>
+  </div>
+</div>

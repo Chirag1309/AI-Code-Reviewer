@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="page-header">
+    <h1>Review History</h1>
+    <p>All your past code reviews</p>
+    <button class="btn btn-primary" routerLink="/submit">+ New Review</button>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading history...</p>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-card" *ngIf="!isLoading && reviews.length === 0">
+    <p>🔍 No reviews yet</p>
+    <span>Submit your first code review to see it here</span>
+    <button class="btn btn-primary" routerLink="/submit">
+      Review Code
+    </button>
+  </div>
+
+  <!-- Reviews Table -->
+  <div class="table-card" *ngIf="!isLoading && reviews.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Language</th>
+          <th>Status</th>
+          <th>Submitted</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let review of reviews">
+          <td>
+            <span class="lang-badge">{{ review.language }}</span>
+          </td>
+          <td>
+            <span class="status-badge status-{{ review.status.toLowerCase() }}">
+              {{ review.status }}
+            </span>
+          </td>
+          <td class="date-cell">
+            {{ review.createdAt | date: 'dd MMM yyyy, hh:mm a' }}
+          </td>
+          <td>
+            <button
+              class="btn btn-secondary btn-sm"
+              [routerLink]="['/review', review.id]">
+              View →
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

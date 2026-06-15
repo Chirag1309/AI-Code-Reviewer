@@ -1,0 +1,16 @@
+# .NET
+bin/
+obj/
+*.user
+
+# Database
+*.mdf
+*.ldf
+
+# Angular
+code-reviewer-ui/node_modules/
+code-reviewer-ui/dist/
+code-reviewer-ui/.angular/
+
+# Secrets
+**/appsettings.Development.json

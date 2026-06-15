@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+
+  &-primary {
+    background: #2563eb;
+    color: white;
+    &:hover { background: #1d4ed8; }
+    &:disabled { background: #475569; cursor: not-allowed; }
+  }
+
+  &-secondary {
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+    &:hover { background: #334155; color: #e2e8f0; }
+  }
+}
+
+.card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  &-critical { background: #7f1d1d; color: #fca5a5; }
+  &-high     { background: #7c2d12; color: #fdba74; }
+  &-medium   { background: #713f12; color: #fde68a; }
+  &-low      { background: #14532d; color: #86efac; }
+  &-security        { background: #1e1b4b; color: #a5b4fc; }
+  &-performance     { background: #0c4a6e; color: #7dd3fc; }
+  &-bug             { background: #450a0a; color: #fca5a5; }
+  &-maintainability { background: #1c1917; color: #d6d3d1; }
+  &-bestpractice    { background: #052e16; color: #86efac; }
+}
