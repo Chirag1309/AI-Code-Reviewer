@@ -1,5 +1,5 @@
 {
-  "outputDirectory": "dist/code-reviewer-ui",
+  "outputDirectory": "dist/code-reviewer-ui/browser",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
